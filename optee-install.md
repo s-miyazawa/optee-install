@@ -26,7 +26,13 @@
 
 ## 想定している環境
 
-- Ubuntu 22.04 Linux (amd64/AArch64)
+- OS
+  - Ubuntu 22.04 Linux (amd64/AArch64)
+- ディス空き容量 30GB
+  - Ubuntu 22.04 GUI版：11GB程度
+  - OP-TEE開発環境：20GB弱程度
+- インストール所要時間
+  - 1時間～数時間
 
 Ubuntu 22.04は、仮想マシンで動作していても、直接ハードウェア上で動作していても問題ありません。また、Intelの64bit環境でも、M1などのApple Siliconで動作する仮想環境のUbuntuでも動作することを確認しています。
 
@@ -158,7 +164,9 @@ QEMUが、localhostのTCPの`54320`をREEの入出力、`54321`をTEEの入出�
 
 ### GUIで実行した場合
 
-UbuntuをGUIで起動している場合は、`make run`コマンドを実行すると自動的に、TEEとREEの内容を出力するターミナルが表示されます。
+UbuntuをGUIで起動している場合は、`make run`コマンドを実行するとqemuが軌道するだけでなく、gnome-terminalのウィンドウに、自動的に**タブ**としてTEE(Normal World)とREE(Secure World)の内容を出力するターミナルが追加され表示されます（下図）。
+
+![gnome-terminal](gnome-terminal.png)
 
 ### CUIで実行した場合
 
