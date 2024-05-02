@@ -53,7 +53,7 @@ Ubuntu 22.04は、仮想マシンで動作していても、直接ハードウ�
 OP-TEEの環境を構築するために最低限必要な、Ubuntu上で動作するアプリケーションやライブラリをインストールします。
 
 ```terminal
-sudo apt update && apt upgrade -y
+sudo apt update && sudo apt upgrade -y
 sudo apt install -y \
     adb \
     acpica-tools \
