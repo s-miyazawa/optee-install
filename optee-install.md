@@ -10,6 +10,7 @@
     - [Repoコマンドによるソースコードのダウンロード](#repoコマンドによるソースコードのダウンロード)
     - [クロスコンパイル環境の構築](#クロスコンパイル環境の構築)
     - [OP-TEEその他を全てコンパイル](#op-teeその他を全てコンパイル)
+    - [コンパイルエラーで止まってしまった場合](#コンパイルエラーで止まってしまった場合)
   - [QEMUの起動](#qemuの起動)
     - [GUIで実行した場合](#guiで実行した場合)
     - [CUIで実行した場合](#cuiで実行した場合)
@@ -147,6 +148,18 @@ make QEMU_USERNET_ENABLE=y QEMU_VIRTFS_ENABLE=y QEMU_VIRTFS_HOST_DIR=$(pwd)/../.
 | `QEMU_USERNET_ENABLE=y` | QEMU上で実行されるLinux(Buildroot)でネットワークを使用する |
 | `QEMU_VIRTFS_ENABLE=y` | QEMU上で実行されるLinux(Buildroot)からQEMU外(Ubuntu)のファイルを読み書きできるようにする |
 | `QEMU_VIRTFS_HOST_DIR=$(pwd)/../../mydev` | QEMU上で実行されるLinux(Buildroot)からマウントする、QEMU外(Ubuntu)のディレクトリ |
+
+### コンパイルエラーで止まってしまった場合
+
+環境構築のためのコンパイルの途中でエラーが発生し、先に進めなくなった場合の対応策の案を記載しておきます。
+
+- Rust関連のコンパイルをやめる
+  - Rust関連のエラーで止まってしまう場合は、`make`コマンドのオプションとして`RUST_ENABLE=n`を追加してください。OP-TEEでRustを利用するためのソースコードがコンパイルされなくなります。
+- 並列コンパイルをやめる
+  - `make`コマンド時の`-j`オプションをやめてシングルタスクでコンパイルしてみてください。成功する可能性があります。
+- OP-TEE環境のバージョンを指定する
+  - Repoコマンドではデフォルトでは最新のOP-TEEをダウンロードします。ブランチを指定することで特定のバージョンをダウンロードすることができます。
+  - たとえば、`repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml -b 4.0.0`のように実行してください。末尾の`-b 4.0.0`がブランチを指定している箇所です。
 
 ## QEMUの起動
 
